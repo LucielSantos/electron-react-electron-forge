@@ -1,21 +1,23 @@
 {
   "compilerOptions": {
     "allowJs": true,
-    "module": "commonjs",
+    "module": "CommonJS",
+    "target": "ES2021",
     "skipLibCheck": true,
     "esModuleInterop": true,
     "noImplicitAny": true,
     "sourceMap": true,
-    "baseUrl": ".",
     "outDir": "dist",
-    "moduleResolution": "node",
+    "moduleResolution": "Node",
     "resolveJsonModule": true,
     "jsx": "react-jsx",
-    "paths": {
-      "*": ["node_modules/*"]
-    }
   },
+
+  "exclude": [
+    "build",
+    "node_modules"
+  ],
   "include": [
-    "src/**/*"
+    "src"
   ]
 }
