@@ -1,9 +1,18 @@
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import { createHashHistory } from "history";
+import {
+  BrowserRouter,
+  Redirect,
+  Route,
+  Switch,
+  HashRouter,
+} from "react-router-dom";
 import { Home, Store } from "../pages";
+
+const history = createHashHistory();
 
 export const Routes = (): JSX.Element => {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Switch>
         <Route path="/" exact component={Home} />
 
@@ -11,6 +20,6 @@ export const Routes = (): JSX.Element => {
 
         <Redirect to="/" />
       </Switch>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
