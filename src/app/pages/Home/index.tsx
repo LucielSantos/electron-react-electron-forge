@@ -10,6 +10,8 @@ export const Home = ({ history }: RouteComponentProps): JSX.Element => {
       <h1>Escolha a página</h1>
 
       <Styles.Nav>
+        <Button onClick={() => handleNavigate("/ipc-main")}>IpcMain</Button>
+
         <Button onClick={() => handleNavigate("/store")}>Store</Button>
       </Styles.Nav>
     </Styles.Container>

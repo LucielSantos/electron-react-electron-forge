@@ -14,4 +14,10 @@ export const GlobalStyle = createGlobalStyle`
     background-color: ${({ theme }) => theme.colors.background};
     color: ${({ theme }) => theme.colors.text};
   }
+
+  #root {
+    max-width: 60rem;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+  }
 `;
