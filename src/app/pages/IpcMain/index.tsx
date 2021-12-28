@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
+import { RouteComponentProps } from "react-router-dom";
 import { ipcRenderer } from "../../../preload/constants";
 import { Button } from "../../components";
 import * as Styles from "./styles";
 
-export const IpcMain = (): JSX.Element => {
+export const IpcMain = ({ history }: RouteComponentProps): JSX.Element => {
   const [messages, setMessage] = useState<string[]>([]);
   const handleSendToMain = () => {
     window.electron.ipcRenderer.send(ipcRenderer.send.sendToMain);
@@ -17,6 +18,8 @@ export const IpcMain = (): JSX.Element => {
 
   return (
     <Styles.Container>
+      <Button onClick={() => history.goBack()}>Voltar</Button>
+
       <h1>IpcMain Page</h1>
 
       <Styles.Section>

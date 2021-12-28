@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
+import { RouteComponentProps } from "react-router-dom";
 import { Button } from "../../components";
 import * as Styles from "./styles";
 
-export const Store = (): JSX.Element => {
+export const Store = ({ history }: RouteComponentProps): JSX.Element => {
   const [count, setCount] = useState<number>(
     window.electron.store.get("count")
   );
@@ -21,6 +22,8 @@ export const Store = (): JSX.Element => {
 
   return (
     <Styles.Container>
+      <Button onClick={() => history.goBack()}>Voltar</Button>
+
       <h1>Store Page</h1>
 
       <Styles.Section>
