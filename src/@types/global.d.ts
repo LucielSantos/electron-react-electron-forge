@@ -1,7 +1,9 @@
+import { Todo } from "../database/entities/Todo";
 import {
   IpcRendererSendConstants,
   IpcRendererOnConstants,
 } from "../preload/constants";
+import { SaveTodo } from "../types/todo";
 
 interface IpcRendererOn {
   (
@@ -19,6 +21,12 @@ declare global {
         };
         on: IpcRendererOn;
         once: IpcRendererOn;
+      };
+      database: {
+        saveTodo: (todo: SaveTodo) => Promise<Todo>;
+        getAllTodos: () => Promise<Todo[]>;
+        onUpdateTodo: (listener: (todos: Todo[]) => void) => void;
+        deleteTodo: (id: number | string) => Promise<any>;
       };
       store: {
         get: (key: string) => any;
