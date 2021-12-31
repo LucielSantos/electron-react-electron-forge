@@ -1,16 +1,22 @@
-import { createConnection, Connection } from "typeorm";
+import path from "path";
+import { Connection, createConnection } from "typeorm";
 import { Todo } from "./entities/Todo";
+export class DatabaseBuilder {
+  public connection: Connection | undefined;
 
-let connection: Connection;
+  constructor() {
+    this.init();
+  }
 
-async function buildConnection() {
-  connection = await createConnection({
-    type: "sqlite",
-    database: `${__dirname}/database.sqlite3`,
-    entities: [Todo],
-  });
+  public async init(): Promise<void> {
+    this.connection = await createConnection({
+      type: "sqlite",
+      database: path.join("./db.sqlite3"),
+      entities: [Todo],
+    });
+
+    if (this.connection.isConnected) {
+      this.connection.synchronize();
+    }
+  }
 }
-
-buildConnection();
-
-export const databaseConnection = connection;

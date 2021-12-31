@@ -1,5 +1,6 @@
 import { contextBridge, ipcRenderer } from "electron";
 import { store } from "./constants";
+import { databaseMethods } from "./database";
 
 // Expose protected methods that allow the renderer process to use
 // the ipcRenderer without exposing the entire object
@@ -28,6 +29,7 @@ const storeMethods = {
 const allMethods = {
   ipcRenderer: ipcRendererMethods,
   store: storeMethods,
+  database: databaseMethods,
 };
 
 contextBridge.exposeInMainWorld("electron", allMethods);
