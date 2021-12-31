@@ -22,7 +22,7 @@ Este template inclui:
 
 ---
 
-TODO
+TODO:
 
 - Adicionar API em express
 - Fazer testes com better-sqlite3 e typeorm

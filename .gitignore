@@ -88,4 +88,4 @@ typings/
 # Electron-Forge
 out/
 
-db.sqlite3
+*.sqlite3
