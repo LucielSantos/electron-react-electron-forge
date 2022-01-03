@@ -6,9 +6,9 @@ import { databaseMethods } from "./database";
 // the ipcRenderer without exposing the entire object
 
 const ipcRendererMethods = {
-  send: (channel: string, ...args: any[]) => {
-    return ipcRenderer.send(channel, ...args);
-  },
+  send: (channel: string, ...args: any[]) => ipcRenderer.send(channel, ...args),
+  sendSync: (channel: string, ...args: any[]) =>
+    ipcRenderer.sendSync(channel, ...args),
   on: (channel: string, listener: (...args: any[]) => void) => {
     ipcRenderer.on(channel, (event, ...args) => listener(...args));
   },

@@ -59,4 +59,4 @@ app.on("activate", () => {
 
 const database = new DatabaseBuilder();
 
-export { store, database };
+export { store, database, mainWindow };

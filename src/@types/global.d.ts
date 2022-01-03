@@ -10,15 +10,23 @@ interface IpcRendererOn {
     channel: IpcRendererOnConstants["receiveByMain"],
     listener: (message: string) => void
   ): void;
+  (
+    channel: IpcRendererOnConstants["receiveMessage"],
+    listener: (message: string) => void
+  ): void;
+}
+
+interface IpcRendererSend {
+  (channel: IpcRendererSendConstants["sendToMain"]): void;
+  (channel: IpcRendererSendConstants["getIp"]): string;
 }
 
 declare global {
   interface Window {
     electron: {
       ipcRenderer: {
-        send: {
-          (channel: IpcRendererSendConstants["sendToMain"]): void;
-        };
+        send: IpcRendererSend;
+        sendSync: IpcRendererSend;
         on: IpcRendererOn;
         once: IpcRendererOn;
       };
