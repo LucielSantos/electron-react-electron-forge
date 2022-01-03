@@ -25,10 +25,10 @@ Este template inclui:
 TODO:
 
 - Adicionar API em express
-- Fazer testes com better-sqlite3 e typeorm
 - Adicionar react-icons
 - Adicionar Material UI
 - Melhoria na configuração de rotas
+- Fazer testes com better-sqlite3 e typeorm
 
 ---
 
