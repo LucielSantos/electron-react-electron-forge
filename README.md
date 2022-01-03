@@ -15,16 +15,15 @@ Este template inclui:
 - Styled-components
 - React router dom
 - Configuração entre renderer e main
-- Electron forge
 - Configuração de banco de dados com:
   - Sqlite3
   - Typeorm
+- API em express
 
 ---
 
 TODO:
 
-- Adicionar API em express
 - Adicionar react-icons
 - Adicionar Material UI
 - Melhoria na configuração de rotas
