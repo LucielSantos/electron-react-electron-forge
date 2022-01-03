@@ -15,6 +15,8 @@ export const Home = ({ history }: RouteComponentProps): JSX.Element => {
         <Button onClick={() => handleNavigate("/store")}>Store</Button>
 
         <Button onClick={() => handleNavigate("/database")}>Database</Button>
+
+        <Button onClick={() => handleNavigate("/api")}>API</Button>
       </Styles.Nav>
     </Styles.Container>
   );

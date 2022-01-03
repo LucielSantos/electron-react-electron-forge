@@ -1,5 +1,5 @@
 import { Redirect, Route, Switch, HashRouter } from "react-router-dom";
-import { Home, Store, IpcMain, Database } from "../pages";
+import { Home, Store, IpcMain, Database, Api } from "../pages";
 
 export const Routes = (): JSX.Element => {
   return (
@@ -12,6 +12,8 @@ export const Routes = (): JSX.Element => {
         <Route path="/ipc-main" exact component={IpcMain} />
 
         <Route path="/database" exact component={Database} />
+
+        <Route path="/api" exact component={Api} />
 
         <Redirect to="/" />
       </Switch>
