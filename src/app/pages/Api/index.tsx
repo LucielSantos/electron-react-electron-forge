@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { apiConstants } from "../../../api/constants";
 import { ipcRenderer } from "../../../preload/constants";
@@ -7,15 +7,22 @@ import * as Styles from "./styles";
 
 export const Api = ({ history }: RouteComponentProps): JSX.Element => {
   const [messages, setMessages] = useState<string[]>([]);
+  const [ip, setIp] = useState<string>();
 
   useEffect(() => {
     window.electron.ipcRenderer.on(
       ipcRenderer.on.receiveMessage,
       (newMessage) => {
-        console.log("ipcRenderer.on.receiveMessage");
         setMessages((prev) => [newMessage, ...prev]);
       }
     );
+
+    (async function () {
+      const newIp = await window.electron.ipcRenderer.invoke(
+        ipcRenderer.send.getIp
+      );
+      setIp(newIp);
+    })();
   }, []);
 
   return (
@@ -27,9 +34,7 @@ export const Api = ({ history }: RouteComponentProps): JSX.Element => {
       <Styles.Section>
         <p>
           Envie uma requisição POST para &nbsp;
-          <code>{`http://${window.electron.ipcRenderer.sendSync(
-            ipcRenderer.send.getIp
-          )}:${apiConstants.port}/send-message`}</code>
+          <code>{`http://${ip}:${apiConstants.port}/send-message`}</code>
           &nbsp; com o body:
           <br />
           <code>

@@ -8,6 +8,6 @@ ipcMain.on(ipcRenderer.send.sendToMain, (event) => {
   event.reply(ipcRenderer.on.receiveByMain, "message-by-main");
 });
 
-ipcMain.on(ipcRenderer.send.getIp, (event) => {
-  return (event.returnValue = ip.address());
+ipcMain.handle(ipcRenderer.send.getIp, async () => {
+  return await ip.address();
 });

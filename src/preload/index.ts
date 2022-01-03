@@ -1,30 +1,10 @@
-import { contextBridge, ipcRenderer } from "electron";
-import { store } from "./constants";
+import { contextBridge } from "electron";
 import { databaseMethods } from "./database";
+import { ipcRendererMethods } from "./ipcRenderer";
+import { storeMethods } from "./store";
 
 // Expose protected methods that allow the renderer process to use
 // the ipcRenderer without exposing the entire object
-
-const ipcRendererMethods = {
-  send: (channel: string, ...args: any[]) => ipcRenderer.send(channel, ...args),
-  sendSync: (channel: string, ...args: any[]) =>
-    ipcRenderer.sendSync(channel, ...args),
-  on: (channel: string, listener: (...args: any[]) => void) => {
-    ipcRenderer.on(channel, (event, ...args) => listener(...args));
-  },
-};
-
-const storeMethods = {
-  get: (key: string) => ipcRenderer.sendSync(store.get, { key }),
-  set: (key: string, value: any) => ipcRenderer.send(store.set, { key, value }),
-  setCount: (newCount: number) =>
-    ipcRenderer.send(store.setCount, { newCount }),
-  onChangeCount: (listener: (newValue: any, oldValue: any) => void) => {
-    ipcRenderer.on(store.onChangeCount, (event, newValue, oldValue) =>
-      listener(newValue, oldValue)
-    );
-  },
-};
 
 const allMethods = {
   ipcRenderer: ipcRendererMethods,
