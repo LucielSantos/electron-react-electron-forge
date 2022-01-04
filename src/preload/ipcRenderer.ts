@@ -7,4 +7,7 @@ export const ipcRendererMethods = {
   on: (channel: string, listener: (...args: any[]) => void) => {
     ipcRenderer.on(channel, (event, ...args) => listener(...args));
   },
+  once: (channel: string, listener: (...args: any[]) => void) => {
+    ipcRenderer.once(channel, (event, ...args) => listener(...args));
+  },
 };
