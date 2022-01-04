@@ -2,7 +2,7 @@ import { ipcRenderer } from "electron";
 import { store } from "./constants";
 
 export const storeMethods = {
-  get: (key: string) => ipcRenderer.sendSync(store.get, { key }),
+  get: (key: string) => ipcRenderer.invoke(store.get, { key }),
   set: (key: string, value: any) => ipcRenderer.send(store.set, { key, value }),
   setCount: (newCount: number) =>
     ipcRenderer.send(store.setCount, { newCount }),

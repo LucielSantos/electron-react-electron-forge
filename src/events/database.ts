@@ -3,7 +3,7 @@ import { TodoRepository } from "../database/repositories/Todo";
 import { database } from "../preload/constants/database";
 import { SaveTodo } from "../types/todo";
 
-ipcMain.on(database.saveTodo, async (event, todo: SaveTodo) => {
+ipcMain.handle(database.saveTodo, async (event, todo: SaveTodo) => {
   try {
     const todoRepository = new TodoRepository();
 
@@ -11,9 +11,9 @@ ipcMain.on(database.saveTodo, async (event, todo: SaveTodo) => {
 
     const allTodos = await todoRepository.getAll();
 
-    event.reply(database.onUpdateTodo, allTodos);
+    event.sender.send(database.onUpdateTodo, allTodos);
 
-    return (event.returnValue = createdTodo);
+    return createdTodo;
   } catch (error) {
     console.log(error);
 
@@ -21,13 +21,13 @@ ipcMain.on(database.saveTodo, async (event, todo: SaveTodo) => {
   }
 });
 
-ipcMain.on(database.getAllTodos, async (event) => {
+ipcMain.handle(database.getAllTodos, async () => {
   try {
     const todoRepository = new TodoRepository();
 
     const allTodos = await todoRepository.getAll();
 
-    return (event.returnValue = allTodos);
+    return allTodos;
   } catch (error) {
     console.log(error);
 
@@ -35,7 +35,7 @@ ipcMain.on(database.getAllTodos, async (event) => {
   }
 });
 
-ipcMain.on(database.deleteTodo, async (event, id: number | string) => {
+ipcMain.handle(database.deleteTodo, async (event, id: number | string) => {
   try {
     const todoRepository = new TodoRepository();
 
@@ -43,9 +43,9 @@ ipcMain.on(database.deleteTodo, async (event, id: number | string) => {
 
     const allTodos = await todoRepository.getAll();
 
-    event.reply(database.onUpdateTodo, allTodos);
+    event.sender.send(database.onUpdateTodo, allTodos);
 
-    return (event.returnValue = deletedTodo);
+    return deletedTodo;
   } catch (error) {
     console.log(error);
 

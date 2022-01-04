@@ -4,9 +4,7 @@ import { Button } from "../../components";
 import * as Styles from "./styles";
 
 export const Store = ({ history }: RouteComponentProps): JSX.Element => {
-  const [count, setCount] = useState<number>(
-    window.electron.store.get("count")
-  );
+  const [count, setCount] = useState<number>();
 
   const changeCount = (expression: "+" | "-") => {
     console.log("add");
@@ -18,6 +16,12 @@ export const Store = ({ history }: RouteComponentProps): JSX.Element => {
     window.electron.store.onChangeCount((newValue) => {
       setCount(newValue);
     });
+
+    (async function (){
+      const newCount = await window.electron.store.get("count")
+
+      setCount(newCount)
+    })()
   }, []);
 
   return (

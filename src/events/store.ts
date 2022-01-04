@@ -2,8 +2,8 @@ import { ipcMain } from "electron";
 import { store as storeConstants } from "../preload/constants";
 import { store } from "../";
 
-ipcMain.on(storeConstants.get, (event, { key }: { key: string }) => {
-  return (event.returnValue = store.get(key));
+ipcMain.handle(storeConstants.get, (event, { key }: { key: string }) => {
+  return store.get(key);
 });
 
 ipcMain.on(
