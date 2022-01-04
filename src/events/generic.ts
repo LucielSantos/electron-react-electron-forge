@@ -9,5 +9,5 @@ ipcMain.on(ipcRenderer.send.sendToMain, (event) => {
 });
 
 ipcMain.handle(ipcRenderer.send.getIp, async () => {
-  return await ip.address();
+  return ip.address();
 });
