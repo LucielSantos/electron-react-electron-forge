@@ -1,21 +1,16 @@
-import { Redirect, Route, Switch, HashRouter } from "react-router-dom";
-import { Home, Store, IpcMain, Database, Api } from "../pages";
+import { Redirect, Switch, HashRouter } from "react-router-dom";
+import { routePaths } from "../constants/routes";
+import { PublicRoutes } from "./PublicRoutes";
+import { AdminRoutes } from "./withLayout";
 
 export const Routes = (): JSX.Element => {
   return (
     <HashRouter>
       <Switch>
-        <Route path="/" exact component={Home} />
+        {PublicRoutes()}
+        {AdminRoutes()}
 
-        <Route path="/store" exact component={Store} />
-
-        <Route path="/ipc-main" exact component={IpcMain} />
-
-        <Route path="/database" exact component={Database} />
-
-        <Route path="/api" exact component={Api} />
-
-        <Redirect to="/" />
+        <Redirect to={routePaths.home} />
       </Switch>
     </HashRouter>
   );
